@@ -3,12 +3,12 @@ import { DataTypes, InferAttributes, InferCreationAttributes, Model, Sequelize }
 export class Task extends Model<InferAttributes<Task>, InferCreationAttributes<Task>>{
     declare taskId: number;
     declare title: string;
-    declare completed: string;
+    declare completed: boolean;
     declare createdAt?: Date;
     declare updatedAt?: Date;
 }
 
-export function TweetFactory(sequelize: Sequelize) {
+export function TaskFactory(sequelize: Sequelize) {
     Task.init({
         taskId: {
             type: DataTypes.INTEGER,
@@ -21,18 +21,9 @@ export function TweetFactory(sequelize: Sequelize) {
             allowNull: false,
         },
         completed: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        createdAt: {
-            type: DataTypes.DATE,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
-            defaultValue: DataTypes.NOW,
-        },
-        updatedAt: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: DataTypes.NOW,
+            defaultValue: false
         }
     }, {
         freezeTableName: true,
